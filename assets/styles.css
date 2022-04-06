@@ -1,0 +1,10 @@
+header {
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+.card {
+  margin: 10px;
+  justify-content: center;
+}
