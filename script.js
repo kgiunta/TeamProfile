@@ -1,16 +1,36 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const employee = {
-    name: "JavaScript",
-    id: "programming language",
-    email: "ES6",
-    github:
-    // are these arrays that we push answers to?
-  };
+const Employee = require("./Employee");
+const Manager = require("./Manager");
+const Engineer = require("./Engineer");
+const Intern = require("./Intern");
 
+// total random puesdo for constructors
+// function userInputs(name, role, id, email, github, school)
+// this.name = name;
+// this.role = role;
+// this.id = id;
+// this.email = email;
+// this.github = github;
+// this.school = school;
+// this.cardMaker = () =>{
+// if
+// }
+
+// const employee = new userInputs()
+// const manager= new userInputs(name,role,id,email,github,)
+// const engineer= new userInputs(name,role,id,email,github,)
+// const intern= new userInputs(name,role,id,email,github,school,)
 
 inquirer
   .prompt([
+    {
+      type: "list",
+      name: "role",
+      message: "Please select the role you would like to fill out: ",
+      choices: ["Manager", "Engineer", "Intern"],
+    },
+
     {
       type: "input",
       name: "name",
@@ -40,24 +60,7 @@ inquirer
   });
 
 function createCard(data) {
-  return `<!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8" />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-            integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
-            crossorigin="anonymous"
-          />
-          <link rel="stylesheet" href="assets/styles.css" />
-          <title>Document</title>
-        </head>
-        <header><h1>My Team</h1></header>
-        <body>
-          <div class="row">
+  return `
             <div class="card row" style="width: 18rem">
               <div class="card-body">
                 <h5 class="card-title">${data.name}</h5>
@@ -69,42 +72,6 @@ function createCard(data) {
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${data.idNum}</li>
                 <li class="list-group-item">Phone: ${data.phone}</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
-              <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-            <div class="card row" style="width: 18rem">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
-              <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-            <div class="card row" style="width: 18rem">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
                 <li class="list-group-item">Vestibulum at eros</li>
               </ul>
               <div class="card-body">
