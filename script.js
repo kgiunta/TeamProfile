@@ -1,9 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const Employee = require("./Employee");
-const Manager = require("./Manager");
-const Engineer = require("./Engineer");
-const Intern = require("./Intern");
+const Employee = require("./lib/Employee");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
 // total random puesdo for constructors
 // function userInputs(name, role, id, email, github, school)
@@ -46,10 +46,30 @@ inquirer
       message: "What is your email?",
       name: "email",
     },
+
     {
       type: "input",
-      message: "What is your phone number?",
-      name: "phone",
+      message: "Please enter office number",
+      name: "number",
+      when: (response) => {
+        if (response.role === "Manager") return true;
+      },
+    },
+    {
+      type: "input",
+      message: "Please enter your GitHub",
+      name: "github",
+      when: (response) => {
+        if (response.role === "Engineer") return true;
+      },
+    },
+    {
+      type: "input",
+      message: "What school do you attend?",
+      name: "school",
+      when: (response) => {
+        if (response.role === "Intern") return true;
+      },
     },
   ])
   .then((data) => {
@@ -71,7 +91,7 @@ function createCard(data) {
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${data.idNum}</li>
-                <li class="list-group-item">Phone: ${data.phone}</li>
+                <li class="list-group-item">Phone: ${data.email}</li>
                 <li class="list-group-item">Vestibulum at eros</li>
               </ul>
               <div class="card-body">
@@ -80,7 +100,6 @@ function createCard(data) {
               </div>
             </div>
           </div>
-        </body>
-      </html>
+       
       `;
 }
