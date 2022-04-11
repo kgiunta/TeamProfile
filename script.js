@@ -4,7 +4,11 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-let allEmployees = [];
+
+const allEmployees = [];
+const engineerArr = [];
+const internArr = [];
+const managerArr = [];
 
 // total random puesdo for constructors
 // function userInputs(name, role, id, email, github, school)
@@ -83,31 +87,64 @@ function createCards() {
     ])
 
     .then((data) => {
+      let teamMember;
+      switch (data.role) {
+        case "Manager":
+          teamMember = new Manager(
+            data.name,
+            data.idNum,
+            data.email,
+            data.number
+          );
+          managerArr.push(teamMember);
+          break;
+        case "Engineer":
+          teamMember = new Engineer(
+            data.name,
+            data.idNum,
+            data.email,
+            data.github
+          );
+          engineerArr.push(teamMember);
+          break;
+        case "Intern":
+          teamMember = new Intern(
+            data.name,
+            data.idNum,
+            data.email,
+            data.school
+          );
+          internArr.push(teamMember);
+          break;
+        default:
+      }
+
       if (data.option === "Yes") {
-        allEmployees.push(data);
+        // console.log(allEmployees);
         return createCards();
       } else {
-        const filename = createCard(data);
-        fs.appendFile("index.html", filename, (err) => {
+        const fileContent = createFileContent();
+        fs.appendFile("index.html", fileContent, (err) => {
           err ? console.log(err) : console.log("Success!");
         });
       }
     });
-  // push data to buildTeam
-  function createCard(data) {
-    if ((data.role = "Manager")) {
-      return `
+  //   creates html string and returns it
+  function createFileContent() {
+    let html = "";
+    managerArr.forEach((manager) => {
+      html += `
             <div class="card row" style="width: 18rem">
               <div class="card-body">
-                <h5 class="card-title">${data.name}</h5>
+                <h5 class="card-title">${manager.name}</h5>
                 <p class="card-text">
-                  ${data.role}
+                  Manager
                 </p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${data.idNum}</li>
-                <li class="list-group-item">Email: <a href ="mailto:${data.email}></a></li>
-                <li class="list-group-item">Phone:${data.number}</li>
+                <li class="list-group-item">ID: ${manager.id}</li>
+                <li class="list-group-item">Email:<a href = "mailto:${manager.email}">${manager.email}</a></li>
+                <li class="list-group-item">Phone:${manager.officeNumber}</li>
               </ul>
               <div class="card-body">
                
@@ -116,49 +153,60 @@ function createCards() {
           </div>
        
      ;`;
-    }
+    });
 
-    if ((data.role = "Engineer")) {
-      return `<div class="card row" style="width: 18rem">
+    internArr.forEach((intern) => {
+      html += `
+            <div class="card row" style="width: 18rem">
+              <div class="card-body">
+                <h5 class="card-title">${intern.name}</h5>
+                <p class="card-text">
+                  Intern
+                </p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${intern.id}</li>
+                <li class="list-group-item">Email:<a href = "mailto:${intern.email}">${intern.email}</a></li>
+                <li class="list-group-item">School:${intern.school}</li>
+              </ul>
+              <div class="card-body">
+
+              </div>
+            </div>
+          </div>
+
+     ;`;
+    });
+
+    engineerArr.forEach((engineer) => {
+      html += `<div class="card row" style="width: 18rem">
                <div class="card-body">
-                 <h5 class="card-title">${data.name}</h5>
+                 <h5 class="card-title">${engineer.name}</h5>
                  <p class="card-text">
-                  ${data.role}
+                  Engineer
                  </p>
                </div>
                <ul class="list-group list-group-flush">
-                 <li class="list-group-item">ID: ${data.idNum}</li>
-                 <li class="list-group-item">Phone: ${data.email}</li>
+                 <li class="list-group-item">ID: ${engineer.idNum}</li>
+                 <li class="list-group-item">Email:<a href = "mailto:${engineer.email}">${engineer.email}</a></li>
                </ul>
                <div class="card-body">
-                 <a href="https://github.com/${data.github}"target=""_blank"> class="card-link">Github</a>
-
+                 <a href="https://github.com/${engineer.gitHub}"target="_blank" class="card-link">Github</a>
+                
                </div>
              </div>
            </div>
 
        `;
-    }
-    if ((data.role = "Intern")) {
-      return `
-               <div class="card row" style="width: 18rem">
-                 <div class="card-body">
-                    <h5 class="card-title">${data.name}</h5>
-                    <p ${data.role}
-                     </p>
-                   </div>
-                   <ul class="list-group list-group-flush">
-                     <li class="list-group-item">ID: ${data.idNum}</li>
-                     <li class="list-group-item">Phone: ${data.email}</li>
-                     <li class="list-group-item">School: ${data.school}</li>
-                   </ul>
-                   <div class="card-body">
-                   </div>
-                 </div>
-               </div>
-    
-           `;
-    }
+      console.log(engineer.gitHub);
+    });
+    return (
+      html +
+      `</body> 
+    </html>
+    `
+    );
   }
 }
+
 createCards();
