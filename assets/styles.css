@@ -8,3 +8,22 @@ header {
   margin: 10px;
   justify-content: center;
 }
+
+.card-body {
+  background-color: rgb(133, 133, 241);
+  color: white;
+}
+
+.list-group-item {
+  text-align: center;
+}
+
+.card-title {
+  font-size: xx-large;
+  text-align: center;
+}
+
+.card-text {
+  font-weight: bold;
+  font-style: italic;
+}
