@@ -10,24 +10,6 @@ const engineerArr = [];
 const internArr = [];
 const managerArr = [];
 
-// total random puesdo for constructors
-// function userInputs(name, role, id, email, github, school)
-// this.name = name;
-// this.role = role;
-// this.id = id;
-// this.email = email;
-// this.github = github;
-// this.school = school;
-// this.cardMaker = () =>{
-// if
-// }
-
-// const employee = new userInputs()
-// const manager= new userInputs(name,role,id,email,github,)
-// const engineer= new userInputs(name,role,id,email,github,)
-// const intern= new userInputs(name,role,id,email,github,school,)
-
-// put prompt into a function to call back to run through questions again call at bottom
 function createCards() {
   inquirer
     .prompt([
@@ -187,7 +169,7 @@ function createCards() {
                  </p>
                </div>
                <ul class="list-group list-group-flush">
-                 <li class="list-group-item">ID: ${engineer.idNum}</li>
+                 <li class="list-group-item">ID: ${engineer.id}</li>
                  <li class="list-group-item">Email:<a href = "mailto:${engineer.email}">${engineer.email}</a></li>
                </ul>
                <div class="card-body">

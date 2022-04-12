@@ -27,3 +27,7 @@ header {
   font-weight: bold;
   font-style: italic;
 }
+
+.row {
+  display: inline-flex;
+}
