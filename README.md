@@ -32,6 +32,8 @@ Below is an image of the HTML file this application created.
 
 ![TeamProfile website in use](./assets/screenshot.html.png)
 
+Please see the video walk through in the following link: https://youtu.be/OS7Q9FIxyVA
+
 ## Credits
 
 Jehyun Jung | Penn LPS Tutor
